@@ -3,7 +3,6 @@ import json
 
 debug_level = 0
 
-
 def WOTD():
 
     url = "https://word-of-the-day2.p.rapidapi.com/word/today"
@@ -19,6 +18,7 @@ def WOTD():
 
     except:
         print("\nERROR:  Problem connecting to server")
+        raise NameError('Problem connecting to server')
 
     else:
         #Response is returned in a mixed list/jason format
@@ -28,11 +28,15 @@ def WOTD():
         word_dict=data[1]
         word_dict_length = len(word_dict)
 
+        result_string = ""
         for i in range(1, word_dict_length+1):
             entry = data[i]
             if entry['word']!="":
-                print("\n\nWOTD:", entry['word'], "\nMeaning:", entry['mean'])
-
+                result_string = (result_string + "Word: " + entry['word'] + "\nMeaning: " + entry['mean'] + "\n")
+                if i < word_dict_length:
+                    result_string = result_string + "\n"
+    return result_string
 
 if __name__ == '__main__':
-    WOTD()
+    results = WOTD()
+    print(results)

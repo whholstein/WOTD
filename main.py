@@ -1,18 +1,37 @@
 # This is a sample Python script.
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
 from word import WOTD
+from datetime import date
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    WOTD()
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    from tkinter import *
+    from tkinter import ttk
 
+    today = date.today().strftime("%B %d, %Y")
+
+    # Collect Word of the Day
+    try:
+        results = WOTD()
+        #print(results)
+
+    except:
+        exit(99)
+
+    # Window definition
+    root = Tk()
+    root.title("Words of the day for " + today)
+
+    mainframe = ttk.Frame(root, padding="3 3 12 12")
+    mainframe.grid(column=0, row=0, sticky=(N, W, E, S))
+
+    root.columnconfigure(0, weight=1)
+    root.rowconfigure(0, weight=1)
+
+    ttk.Label(mainframe, text=results, borderwidth=2, relief="sunken",padding=10).grid(column=2, row=2, sticky=(W, E))
+
+    for child in mainframe.winfo_children():
+        child.grid_configure(padx=5, pady=5)
+
+    # Invoke Window
+    root.mainloop()
