@@ -3,8 +3,8 @@ import json
 
 debug_level = 0
 
-if __name__ == '__main__':
 
+def WOTD():
 
     url = "https://word-of-the-day2.p.rapidapi.com/word/today"
 
@@ -32,3 +32,7 @@ if __name__ == '__main__':
             entry = data[i]
             if entry['word']!="":
                 print("\n\nWOTD:", entry['word'], "\nMeaning:", entry['mean'])
+
+
+if __name__ == '__main__':
+    WOTD()
